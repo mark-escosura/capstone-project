@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Category from '../../sub-components/Category/Category.component';
+import Category from '../../sub-components/Category/category.component';
 import './categories.style.scss';
 
 const Categories = () => {

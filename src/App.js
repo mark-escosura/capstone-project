@@ -1,12 +1,19 @@
-import Categories from './components/Categories/Categories.component';
+import Navbar from './components/Navbar/navbar.component.jsx';
+import Hero from './components/Hero/hero.component.jsx';
+import { Routes, Route } from 'react-router-dom';
+
+import './App.styles.scss';
 
 function App() {
   return (
-    <div className='hero-container'>
-      <h1>Fake Store</h1>
-      <Categories />
-      <button>Shop Now</button>
-    </div>
+    <>
+      <Navbar />
+      <div className='layout'>
+        <Routes>
+          <Route path='/' element={<Hero />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 

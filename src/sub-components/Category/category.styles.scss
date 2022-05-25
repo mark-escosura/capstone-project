@@ -5,8 +5,15 @@
     border: 1px solid #333;
     border-radius: 0.5rem;
 
+    background-color: hsl(0, 0%, 20%);
+    color: #eee;
+
+    &:hover {
+        background-color: hsla(0, 0%, 20%, 0.8);
+        cursor: pointer;
+    }
+
     & > *:hover {
         text-decoration: underline;
-        cursor: pointer;
     }
 }

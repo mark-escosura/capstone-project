@@ -1,23 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
 import './navbar.styles.scss';
 
 const Navbar = () => {
   return (
-    <nav>
-      <div className='nav-container'>
-        <div className='logo-container'>
+    <Fragment>
+      <nav className='nav-container'>
+        <Link to='/' className='logo-container'>
           <h1 className='logo'>FS</h1>
-        </div>
+        </Link>
         <input placeholder='search' type='search' />
         <div className='links-container'>
-          <Link to='/'>Home</Link>
           <Link to='about'>About</Link>
           <Link to='shop'>Shop</Link>
-          <Link to='contact'>Contact</Link>
+          <Link to='sign-in'>Sign In</Link>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <Outlet />
+    </Fragment>
   );
 };
 

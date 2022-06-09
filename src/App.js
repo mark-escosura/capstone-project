@@ -1,19 +1,26 @@
-import Navbar from './components/Navbar/navbar.component.jsx';
-import Hero from './components/Hero/hero.component.jsx';
 import { Routes, Route } from 'react-router-dom';
 
-import './App.styles.scss';
+import Navbar from './routes/Navbar/navbar.component.jsx';
+import Home from './routes/Home/home.component.jsx';
+
+const Shop = () => {
+  return <div>Shop</div>;
+};
+
+const SignIn = () => {
+  return <div>SignIn</div>;
+};
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <div className='layout'>
-        <Routes>
-          <Route path='/' element={<Hero />} />
-        </Routes>
-      </div>
-    </>
+    <Routes>
+      <Route path='/' element={<Navbar />}>
+        <Route index element={<Home />} />
+        <Route path='shop' element={<Shop />} />
+        <Route path='sign-in' element={<SignIn />} />
+        <Route path='*' element={<div>Not Found</div>} />
+      </Route>
+    </Routes>
   );
 }
 

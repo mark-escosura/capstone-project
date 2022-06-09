@@ -2,6 +2,8 @@ import {
   signInWithGooglePopUp,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils';
+import SignUpForm from '../../components/SignUpForm/SignUpForm.component';
+import Button from '../../sub-components/Button/Button.component';
 
 const SignIn = () => {
   const logGoogleUser = async () => {
@@ -9,24 +11,12 @@ const SignIn = () => {
     const userDocRef = await createUserDocumentFromAuth(user);
   };
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div>
       <h1>SignIn</h1>
-      <button>
-        <img
-          src='https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg'
-          width={50}
-          height={50}
-          alt='google'
-          onClick={logGoogleUser}
-        />
-      </button>
+      <Button type='submit' buttonType='google' onClick={logGoogleUser}>
+        Sign In With Google
+      </Button>
+      <SignUpForm />
     </div>
   );
 };

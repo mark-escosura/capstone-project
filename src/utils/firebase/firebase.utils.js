@@ -1,9 +1,9 @@
 import { initializeApp } from 'firebase/app'; // creates a new app instance for the given firebase config
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -27,10 +27,10 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth(); // Get a reference to the auth service from the app object
-export const signInWithGooglePopUp = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopUp = () => signInWithPopup(auth, provider); // Get a reference to the firestore service from the app object
 
 export const db = getFirestore(); // Get a reference to the database service from the app object
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   if (!userAuth) return;
   const userRef = await doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userRef);
@@ -43,10 +43,16 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInfo,
       });
     } catch (error) {
       console.log('error creating user', error);
     }
   }
   return userRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -9,8 +8,10 @@ import FormInput from '../../sub-components/FormInput/FormInput.component';
 import Button from '../../sub-components/Button/Button.component';
 // styles
 import './SignUpForm.styles.scss';
+// utils
+import useForm from '../../utils/hooks/useForm';
 
-const initialFormValues = {
+const InitialFormValues = {
   displayName: '',
   email: '',
   password: '',
@@ -18,20 +19,8 @@ const initialFormValues = {
 };
 
 const SignUpForm = () => {
-  const [initialValues, setInitialValues] = useState(initialFormValues);
-  const { displayName, email, password, confirmPassword } = initialValues;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInitialValues({
-      ...initialValues,
-      [name]: value,
-    });
-  };
-
-  const clearForm = () => {
-    setInitialValues(initialFormValues);
-  };
+  const [formValues, handleChange, clearForm] = useForm(InitialFormValues);
+  const { displayName, email, password, confirmPassword } = formValues;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +48,7 @@ const SignUpForm = () => {
   return (
     <div className='sign-up-container'>
       <h2>Don't have an account?</h2>
+      <h4>Sign up with your email and password</h4>
       <form onSubmit={handleSubmit}>
         <FormInput
           label='Name'
@@ -92,7 +82,7 @@ const SignUpForm = () => {
           name='confirmPassword'
           onChange={handleChange}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>SignUp</Button>
       </form>
     </div>
   );
